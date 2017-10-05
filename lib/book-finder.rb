@@ -1,0 +1,6 @@
+$LOAD_PATH << File.expand_path(File.dirname(__FILE__))
+require 'rubygems'
+require 'dotenv/load'
+
+require 'book-finder/amazon'
+require 'book-finder/good_reads_shelf'

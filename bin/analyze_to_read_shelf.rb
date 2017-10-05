@@ -1,15 +1,6 @@
-require 'dotenv/load'
-require 'goodreads'
+require_relative '../lib/book-finder.rb'
 
-client = Goodreads::Client.new(api_key: ENV['GOODREADS_API_KEY'], api_secret: ENV['GOODREADS_SECRET_KEY'])
-page = 1
-more_pages = true
-while more_pages do
-  shelf = client.shelf(ENV['GOODREADS_USER_ID'], 'to-read', {page:page})
-  books = shelf.books
-  books.each do |book|
-    puts "#{book['book']['isbn13']} / #{book['book']['title']}"
-  end
-  more_pages = (shelf.end != shelf.total)
-  page += 1
-end
+#shelf = GoodReadsShelf.new( "to-read" )
+
+amazon = Amazon.new
+amazon.find_book( 'neuromancer' )
