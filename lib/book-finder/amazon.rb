@@ -12,8 +12,9 @@ class Amazon
     
     price_node =driver.find_element(:xpath => "//tr[contains(@class, 'kindle-price')]/td[contains(@class, 'a-color-price')]")
     price = price_node.text.gsub( price_node.find_elements( :xpath => "*" ).first.text, "" )
-    
-    return AmazonBook.new( title, false, price )
+
+    kindle_unlimited = driver.find_elements(:xpath => "//i[contains( @class, 'a-icon-kindle-unlimited')]").count > 0
+    return AmazonBook.new( title, kindle_unlimited, price )
   end
    
 end
