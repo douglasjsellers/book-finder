@@ -4,3 +4,4 @@ require 'dotenv/load'
 
 require 'book-finder/amazon'
 require 'book-finder/good_reads_shelf'
+require 'book-finder/amazon_book'
