@@ -1,13 +1,17 @@
 require 'selenium-webdriver'
  
 class Amazon
-  def initialize
+  def initialize( chrome = null )
+    if( chrome )
+      @chrome = chrome
+    else
+      @chrome = Chrome.new
+    end
+      
   end
  
   def find_book_by_asin( book_asin )
-    options = Selenium::WebDriver::Chrome::Options.new(args: ['headless'])
-    driver = Selenium::WebDriver.for(:chrome, options: options)
-    driver.get("https://www.amazon.com/dp/#{book_asin}")
+    driver = @chrome.fetch_url("https://www.amazon.com/dp/#{book_asin}")
     title = driver.find_element( :id, "ebooksProductTitle" ).text
     
     price_node =driver.find_element(:xpath => "//tr[contains(@class, 'kindle-price')]/td[contains(@class, 'a-color-price')]")
