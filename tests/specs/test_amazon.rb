@@ -51,7 +51,7 @@ describe Amazon do
     book.kindle_price.should == 11.99
   end
 
-  it "should be able to find price on 0575088273 kindle page" do
+  it "should be able to find price on an undiscounted kindle book" do
     hardcover_asn = "0575088273"
     amazon = Amazon.new( @chrome )    
     book = amazon.find_book_by_asin( hardcover_asn )
