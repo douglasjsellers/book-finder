@@ -6,7 +6,7 @@ require 'goodreads'
 def fetch_asin( asin )
   begin
     amazon = Amazon.new( @chrome )
-    book = amazon.find_book_by_asin( asin )
+    book = amazon.find_kindle_book_by_asin( asin )
     
     puts "#{book.title},#{book.on_kindle_unlimited?},#{book.kindle_price}"
   rescue

@@ -10,7 +10,7 @@ class Amazon
       
   end
  
-  def find_book_by_asin( book_asin )
+  def find_kindle_book_by_asin( book_asin )
     driver = @chrome.fetch_url("https://www.amazon.com/dp/#{book_asin}")
 
     if( has_kindle_book?( driver ) )
@@ -49,6 +49,7 @@ class Amazon
     driver.find_elements(:xpath => "//div[contains( @id, 'formats')]//*/ul/li//*/a").each do |element|
       if( element.text.index( 'Kindle' ) )
         to_return = true
+        return to_return
       end
     end
     return to_return
