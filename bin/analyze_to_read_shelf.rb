@@ -23,6 +23,11 @@ client = Goodreads::Client.new(api_key: ENV['GOODREADS_API_KEY'], api_secret: EN
 shelf = client.shelf(ENV['GOODREADS_USER_ID'], 'to-read')
 (shelf.start .. shelf.end).each do |page|
   client.shelf(ENV['GOODREADS_USER_ID'], 'to-read', {page: page} ).books.each do |book|
-    fetch_asin( book.to_h['book']['isbn'] ) if book.to_h['book']['isbn']
+    if book.to_h['book']['isbn']    
+      fetch_asin( book.to_h['book']['isbn'] )
+    else
+      #sometimes, for some strange reason, the isbn isn't included with a book that is returned via a self
+      fetch_asin( client.book( book['book']['id'] ).to_h['asin'] )
+    end
   end
 end
