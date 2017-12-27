@@ -12,14 +12,14 @@ class Amazon
   
   def find_kindle_book_by_asin( book_asin )
     driver = @chrome.fetch_url("https://www.amazon.com/dp/#{book_asin}")
-
     if( has_kindle_book?( driver ) )
       driver = ensure_on_kindle_page( driver )
       if( kindle_book_discontinued?( driver ) )
         return nil
       end
+
       title = driver.find_element( :id, "ebooksProductTitle" ).text
-      price_node = driver.find_element(:xpath => "//tr[contains(@class, 'kindle-price')]/td[contains(@class, 'a-color-price')]")
+      price_node = driver.find_element(:xpath => "//*[contains(@class, 'a-color-price')]")
       if( price_node.find_elements( :xpath => "*" ).count > 0 )
         price = price_node.text.gsub( price_node.find_elements( :xpath => "*" ).first.text, "" )
       else

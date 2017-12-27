@@ -9,6 +9,7 @@ describe Amazon do
     @kindle_bad_asin ="0071401946"
   end
 
+
   it "should be able to get the correct title of a kindle book" do
     @chrome.nil?.should == false
 
@@ -66,10 +67,17 @@ describe Amazon do
     amazon.find_kindle_book_by_asin( hardcover_asn ).should == nil
   end
 
-  it "should return nil " do
+  it "should return nil on a bad asin " do
     amazon = Amazon.new( @chrome )    
     amazon.find_kindle_book_by_asin( @kindle_bad_asin ).should == nil
   end
 
+    
+  it "new formatted kindle page should return correct price" do
+    amazon = Amazon.new( @chrome )    
+    book = amazon.find_kindle_book_by_asin( "0743249275" )
+    book.kindle_price.should == 16.99
+  end
+  
 end
 
