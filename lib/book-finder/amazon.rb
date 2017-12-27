@@ -36,7 +36,7 @@ class Amazon
     driver.find_elements(:xpath => "//div[contains( @id, 'formats')]//*/ul/li[contains(@class, 'unselected')]//*/a").each do |element|
       if (element.text.index( 'Kindle' ) )
         element.click
-        wait = Selenium::WebDriver::Wait.new(:timeout => 55)
+        wait = Selenium::WebDriver::Wait.new(:timeout => 5)
         wait.until { driver.find_element( :id, "ebooksProductTitle" ) }
         break
       end
