@@ -15,10 +15,9 @@ class Amazon
 
     if( has_kindle_book?( driver ) )
       driver = ensure_on_kindle_page( driver )
-      if( driver.find_elements( :xpath => "//span[contains(@class, 'no-kindle-offer-message')]" ).count > 0 )
+      if( kindle_book_discontinued?( driver ) )
         return nil
       end
-      
       title = driver.find_element( :id, "ebooksProductTitle" ).text
       price_node = driver.find_element(:xpath => "//tr[contains(@class, 'kindle-price')]/td[contains(@class, 'a-color-price')]")
       if( price_node.find_elements( :xpath => "*" ).count > 0 )
@@ -58,6 +57,9 @@ class Amazon
     end
     return to_return
   end
-  
+
+  def kindle_book_discontinued?( driver )
+    return driver.find_elements( :xpath => "//span[contains(@class, 'no-kindle-offer-message')]" ).count > 0
+  end
   
 end
