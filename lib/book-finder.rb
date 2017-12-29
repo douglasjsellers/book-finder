@@ -6,3 +6,6 @@ require 'book-finder/amazon'
 require 'book-finder/good_reads_shelf'
 require 'book-finder/amazon_book'
 require 'book-finder/chrome'
+require 'book-finder/overdrive'
+
+
