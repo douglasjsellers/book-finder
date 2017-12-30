@@ -7,8 +7,11 @@ class OverDrive
 
 
   def find_book( title, author )
-    puts "searching for #{title}, #{author}" if @debug
     driver = @chrome.fetch_url(@overdrive_url)
+    title = title.split( ':' ).first.strip
+    title = title.split( '(' ).first.strip
+    author = author.strip
+    puts "searching for #{title}, #{author}" if @debug    
     navigate_to_advanced_search( driver )
     perform_advance_search( driver, title, author )
     if( any_results_returned?( driver ) )
