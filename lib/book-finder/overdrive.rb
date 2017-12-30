@@ -7,6 +7,7 @@ class OverDrive
 
 
   def find_book( title, author )
+    puts "searching for #{title}, #{author}" if @debug
     driver = @chrome.fetch_url(@overdrive_url)
     navigate_to_advanced_search( driver )
     perform_advance_search( driver, title, author )
@@ -19,8 +20,6 @@ class OverDrive
 
   private
   def any_results_returned?( driver )
-    title = driver.find_element(:xpath => "//span[contains(@class, 'search-text')]")
-    puts title.text if @debug
     driver.find_elements( :xpath => "//ul[contains(@class, 'js-title-collection-view')]/li" ).count > 0
   end
 

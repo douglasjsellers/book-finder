@@ -19,6 +19,7 @@ class Amazon
       end
 
       title = driver.find_element( :id, "ebooksProductTitle" ).text
+      author = driver.find_element( :xpath => "//a[contains(@class, 'contributorNameID')]").text
       price_node = driver.find_element(:xpath => "//*[contains(@class, 'a-color-price')]")
       if( price_node.find_elements( :xpath => "*" ).count > 0 )
         price = price_node.text.gsub( price_node.find_elements( :xpath => "*" ).first.text, "" )
@@ -27,7 +28,7 @@ class Amazon
       end
 
       kindle_unlimited = driver.find_elements(:xpath => "//i[contains( @class, 'a-icon-kindle-unlimited')]").count > 0
-      return AmazonBook.new( title, kindle_unlimited, price )
+      return AmazonBook.new( title, author, kindle_unlimited, price )
     else
       return nil
     end

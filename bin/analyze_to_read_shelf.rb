@@ -4,17 +4,14 @@ require 'goodreads'
 @chrome = Chrome.new
 
 def fetch_asin( asin, title )
-  begin
-    amazon = Amazon.new( @chrome )
+  amazon = Amazon.new( @chrome )
+  book = amazon.find_kindle_book_by_asin( asin )
 
-    book = amazon.find_kindle_book_by_asin( asin )
-    if( book )
-      puts "#{asin}, #{book.title},#{book.on_kindle_unlimited?},#{book.kindle_price}"
-    else
-      puts "#{asin}, #{title}, No Kindle book"
-    end
-  rescue Exception => e
-    puts "Bad ASIN: #{asin}: #{e.message}"
+  if( book )
+    overdrive_book = OverDrive.new( 'https://hawaii.overdrive.com', @chrome ).find_book( book.title, book.author )
+    puts "#{asin}, #{book.title},#{book.on_kindle_unlimited?},#{book.kindle_price},#{overdrive_book}"
+  else
+    puts "#{asin}, #{title}, No Kindle book"
   end
 end
 
