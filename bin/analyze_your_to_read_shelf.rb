@@ -58,6 +58,12 @@ def find_isbn( book, client )
   to_return
 end
 
+if( @libraries.length > 0 )
+  puts "ASIN, Book Title, Kindle Unlimited, Kindle Price, Library Book Title, Library Book Author, Library URL, Books Avaialable to Take Out, Number of People Waiting To Take Book Out"
+else
+  puts "ASIN, Book Title, Kindle Unlimited, Kindle Price"
+end
+
 client = Goodreads::Client.new(api_key: ENV['GOODREADS_API_KEY'], api_secret: ENV['GOODREADS_SECRET_KEY'])
 
 shelf = client.shelf(ENV['GOODREADS_USER_ID'], 'to-read')
