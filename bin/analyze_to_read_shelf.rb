@@ -4,23 +4,38 @@ require 'goodreads'
 
 @chrome_overdrive = Chrome.new
 @chrome = Chrome.new
+@libraries = ['https://hawaii.overdrive.com','https://lapl.overdrive.com']
 
-def fetch_asin( asin, title )
+def fetch_library_data( title, author )
+  results = @libraries.collect do |library|
+    OverDrive.new( library, @chrome_overdrive ).find_book( title, author )
+  end
+  results = results.compact
+  if( results.length > 0 )
+    results.join( "," )
+  else
+    "#{title},#{author}, Not at any library"
+  end
+end
+
+def fetch_asin( asin, title, author )
   begin
     amazon = Amazon.new( @chrome )
-
     book = amazon.find_kindle_book_by_asin( asin )
-
     if( book )
-      overdrive_book = OverDrive.new( 'https://hawaii.overdrive.com', @chrome_overdrive ).find_book( book.title, book.author )
-      puts "#{asin}, #{book.title},#{book.on_kindle_unlimited?},#{book.kindle_price},#{overdrive_book}"
+      puts "\"#{asin}\",\"#{title}\",#{book.on_kindle_unlimited?},#{book.kindle_price},#{fetch_library_data( title, author)}"
     else
-      puts "#{asin}, #{title}, No Kindle book"
+      puts "\"#{asin}\",\"#{title}\",false,-1,#{fetch_library_data( title, author)}"
     end
   rescue Exception => e
-    puts "Bad ASIN: #{asin}: #{e.message}"
     @chrome_overdrive = Chrome.new
     @chrome = Chrome.new
+    
+    if( e.message == "Net::ReadTimeout" )
+      fetch_asin( asin, title, author )
+    else
+      puts "Bad ASIN: #{asin}: #{e.message}"
+    end
   end
 end
 
@@ -48,6 +63,6 @@ client = Goodreads::Client.new(api_key: ENV['GOODREADS_API_KEY'], api_secret: EN
 shelf = client.shelf(ENV['GOODREADS_USER_ID'], 'to-read')
 (shelf.start .. shelf.end).each do |page|
   client.shelf(ENV['GOODREADS_USER_ID'], 'to-read', {page: page} ).books.each do |book|
-    fetch_asin( find_isbn( book, client ), book.to_h['book']['title'] )
+    fetch_asin( find_isbn( book, client ), book.to_h['book']['title'], book.to_h['book']['authors']['author']['name'] )
   end
 end
