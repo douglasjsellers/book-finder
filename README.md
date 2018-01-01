@@ -28,6 +28,6 @@ The overdrive library urls can be found by going to the overdrive library search
 
 If you happen to have multiple library cards you can run the same command with multiple library urls.  For example:
 
-`bundle exec ruby bin/analyze_your_to_read_shelf.rb https://hawaii.overdrive.com https://lapl.overdrive.com'
+`bundle exec ruby bin/analyze_your_to_read_shelf.rb https://hawaii.overdrive.com https://lapl.overdrive.com`
 
 Will run an analysis on your to-read shelf but look at two different overdrive libraries to see what the availability looks like.
