@@ -14,7 +14,7 @@ def fetch_library_data( title, author )
   if( results.length > 0 )
     results.join( "," )
   else
-    "#{title},#{author}, Not at any library"
+    "\"#{title}\",\"#{author}\", Not at any library"
   end
 end
 

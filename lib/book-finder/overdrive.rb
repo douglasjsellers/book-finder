@@ -10,10 +10,10 @@ class OverDrive
     driver = @chrome.fetch_url(@overdrive_url)
     title = title.split( ':' ).first.strip
     title = title.split( '(' ).first.strip
-    author = author.strip
+    author_last_name = author.strip.split( ' ' ).last
     puts "searching for #{title}, #{author} for #{@overdrive_url}" if @debug    
     navigate_to_advanced_search( driver )
-    perform_advance_search( driver, title, author )
+    perform_advance_search( driver, title, author_last_name )
     if( any_results_returned?( driver ) )
       fetch_book_info( driver, title, author )
     else
