@@ -4,7 +4,7 @@ require 'goodreads'
 
 @chrome_overdrive = Chrome.new
 @chrome = Chrome.new
-@libraries = ['https://hawaii.overdrive.com','https://lapl.overdrive.com']
+@libraries = ARGV
 
 def fetch_library_data( title, author )
   results = @libraries.collect do |library|
@@ -13,7 +13,7 @@ def fetch_library_data( title, author )
   results = results.compact
   if( results.length > 0 )
     results.join( "," )
-  else
+  elsif( @libraries.length > 0 )
     "\"#{title}\",\"#{author}\", Not at any library"
   end
 end
