@@ -3,7 +3,8 @@ The goal of this program is to help people spend as little as possible on books 
 
 ## Setup
 After cloning this repo you will need to put a .env file in the root directory that is formatted like so:
-`GOODREADS_API_KEY='My API Key'
+`
+GOODREADS_API_KEY='My API Key'
 GOODREADS_SECRET_KEY='MY SECRET KEY'`
 
 You can optain a api key and secret throught the goodreads api program here: https://www.goodreads.com/api/keys.  Once you have filled in this .env file you will then have to do a 
@@ -16,7 +17,9 @@ The most common usage of this tool is to analyze your to-read shelf for all info
 `bundle exec ruby bin/analyze_a_to_read_shelf.rb <GOODREADS USER ID> <OVERDRIVE LIBRARY URLS>`
 
 The GoodReads user id can be found in the url of your to-read self.  For example:
+
 `https://www.goodreads.com/review/list/36167974?shelf=to-read`
+
 My GoodReads user id is 36167974.  
 
 The overdrive library urls can be found by going to the overdrive library search (https://www.overdrive.com/libraries), putting in your zip, clicking on your library and then clicking on the name of the library system that appears in the popup on the map.  For example, my zip code is 91411, my library is the "Sherman Oaks - Martin Pollard Library" and my library system is "Los Angeles Public Library".  Clicking this last link took me to "https://lapl.overdrive.com/" which is the overdrive url of my library.  So to analyze my shelf I would run:
@@ -24,5 +27,7 @@ The overdrive library urls can be found by going to the overdrive library search
 `bundle exec ruby bin/analyze_a_to_read_shelf.rb 36167974 https://lapl.overdrive.com/`
 
 If you happen to have multiple library cards you can run the same command with multiple library urls.  For example:
+
 `bundle exec ruby bin/analyze_your_to_read_shelf.rb https://hawaii.overdrive.com https://lapl.overdrive.com'
+
 Will run an analysis on your to-read shelf but look at two different overdrive libraries to see what the availability looks like.
