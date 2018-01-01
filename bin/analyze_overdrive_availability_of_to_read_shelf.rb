@@ -3,7 +3,7 @@ require 'dotenv/load'
 require 'goodreads'
 
 @chrome_overdrive = Chrome.new
-@libraries = ['https://hawaii.overdrive.com','https://lapl.overdrive.com']
+@libraries = ARGV
 def fetch_library_data( title, author )
   results = @libraries.collect do |library|
     OverDrive.new( library, @chrome_overdrive ).find_book( title, author )
@@ -11,8 +11,8 @@ def fetch_library_data( title, author )
   results = results.compact
   if( results.length > 0 )
     puts results.join( "," )
-  else
-    puts "#{title},#{author}, Not at any library"
+  elsif( @libraries.length > 0 )
+    puts "\"#{title}\",\"#{author}\', Not at any library"
   end
 end
 
