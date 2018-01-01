@@ -28,6 +28,24 @@ The overdrive library urls can be found by going to the overdrive library search
 
 If you happen to have multiple library cards you can run the same command with multiple library urls.  For example:
 
-`bundle exec ruby bin/analyze_your_to_read_shelf.rb https://hawaii.overdrive.com https://lapl.overdrive.com`
+`bundle exec ruby bin/analyze_a_to_read_shelf.rb https://hawaii.overdrive.com https://lapl.overdrive.com`
 
 Will run an analysis on your to-read shelf but look at two different overdrive libraries to see what the availability looks like.
+
+
+## A Note on Multiple Library Cards
+If your goal is to spend as little as possible on reading every year, and you read a decent number of books, the best bang for your buck is probably not in a Kindle Unlimited Subscription or in just buying books that your local library doesn't have but rather in a non-resident library card at one of the big libraries.  The way that most, larger, public libraries work is that if you are a resident of the county that the library exists in you get a library card for free.  If you don't live in that county you can often pay a yearly fee to get a library card.  The larger libraries often have fantastic selection and can, when combined with your local library card, knock your yearly book buying bill to next to nothing.  Here is a small list of larger libraries that have non-resident programs:
+* Los Angeles : https://www.lapl.org/about-lapl/borrower-services#apply
+* Fairfax County: https://m.fairfaxcounty.gov/library/accountservices/nonresapp.htm
+* Free Library of Philadelphia: https://know.freelibrary.org/MyResearch/register
+* Houston Public Library: http://houstonlibrary.org/find-it/my-link
+* Atlanta-Fulton Public Library: http://www.afpls.org/afplsservices/library-cards
+* Charlotte Mecklenburg Library: https://www.cmlibrary.org/getacard
+* Brooklyn Public Library: https://www.bklynlibrary.org/use-the-library/borrow
+* Austin Public Library: http://library.austintexas.gov/mylibrarycard
+
+You can determine what kind of coverage this would give you by running an analyze with all of the overdrive URLs for these libraries:
+
+`bundle exec ruby bin/analyze_a_to_read_shelf.rb <GOODREADS USER ID>  https://austinlibrary.overdrive.com/ https://brooklyn.overdrive.com/ https://plcmc.overdrive.com/ https://afpls.overdrive.com/ https://hadc.overdrive.com/ https://freelibrary.overdrive.com/ https://lapl.overdrive.com/ https://fairfax.overdrive.com/`
+
+This list is really just the tip of the iceberg - there are tons more libraries out there that support non-resident cards.  Adding one more large library to your overdrive account can greatly decrease your yearly spend on books.
