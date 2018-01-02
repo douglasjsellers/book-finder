@@ -27,7 +27,7 @@ else
   if( @libraries.length > 0 )
     puts "Library Book Title, Library Book Author, Library URL, Books Available to Take Out, Number of People Waiting To Take Book Out"
   else
-    puts "No Libraires Specified"
+    puts "No Libraries Specified"
   end
 
   client = Goodreads::Client.new(api_key: ENV['GOODREADS_API_KEY'], api_secret: ENV['GOODREADS_SECRET_KEY'])
