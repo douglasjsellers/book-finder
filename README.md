@@ -12,6 +12,8 @@ You can optain a api key and secret throught the goodreads api program here: htt
 to get the appropriate dependencies installed.
 
 ## Usage
+
+### Kindle Information + Library Information
 The most common usage of this tool is to analyze your to-read shelf for all information:
 
 `bundle exec ruby bin/analyze_a_to_read_shelf.rb <GOODREADS USER ID> <OVERDRIVE LIBRARY URLS>`
@@ -20,7 +22,7 @@ The GoodReads user id can be found in the url of your to-read self.  For example
 
 `https://www.goodreads.com/review/list/36167974?shelf=to-read`
 
-My GoodReads user id is 36167974.  
+My GoodReads user id is 36167974.
 
 The overdrive library urls can be found by going to the overdrive library search (https://www.overdrive.com/libraries), putting in your zip, clicking on your library and then clicking on the name of the library system that appears in the popup on the map.  For example, my zip code is 91411, my library is the "Sherman Oaks - Martin Pollard Library" and my library system is "Los Angeles Public Library".  Clicking this last link took me to "https://lapl.overdrive.com/" which is the overdrive url of my library.  So to analyze my shelf I would run:
 
@@ -31,6 +33,12 @@ If you happen to have multiple library cards you can run the same command with m
 `bundle exec ruby bin/analyze_a_to_read_shelf.rb 36167974 https://hawaii.overdrive.com https://lapl.overdrive.com`
 
 Will run an analysis on your to-read shelf but look at two different overdrive libraries to see what the availability looks like.
+
+### Just Library Information
+The slowest part of this whole process is determing the kindle price and the kindle unlimited availability.  I have found that, mostly, knowing the kindle price is unnecessary.  Mostly you are focused on finding books on overdrive.  If that is all you want it is actually faster to use 
+`bundle exec ruby bin/analyze_a_to_read_shelf_for_overdrive.rb <GOODREADS USER ID> <OVERDRIVE LIBRARY URLS>`
+
+This will just scan the libraries and output the library information.
 
 
 ## A Note on Multiple Library Cards
@@ -46,6 +54,6 @@ If your goal is to spend as little as possible on reading every year, and you re
 
 You can determine what kind of coverage this would give you by running an analyze with all of the overdrive URLs for these libraries:
 
-`bundle exec ruby bin/analyze_a_to_read_shelf.rb <GOODREADS USER ID>  https://austinlibrary.overdrive.com/ https://brooklyn.overdrive.com/ https://plcmc.overdrive.com/ https://afpls.overdrive.com/ https://hadc.overdrive.com/ https://freelibrary.overdrive.com/ https://lapl.overdrive.com/ https://fairfax.overdrive.com/`
+`bundle exec ruby bin/analyze_a_to_read_shelf_for_overdrive.rb <GOODREADS USER ID>  https://austinlibrary.overdrive.com/ https://brooklyn.overdrive.com/ https://plcmc.overdrive.com/ https://afpls.overdrive.com/ https://hadc.overdrive.com/ https://freelibrary.overdrive.com/ https://lapl.overdrive.com/ https://fairfax.overdrive.com/`
 
 This list is really just the tip of the iceberg - there are tons more libraries out there that support non-resident cards.  Adding one more large library to your overdrive account can greatly decrease your yearly spend on books.
