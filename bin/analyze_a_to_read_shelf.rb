@@ -17,7 +17,8 @@ else
     end
     results = results.compact
     if( results.length > 0 )
-      results.join( "," )
+      results = results.sort_by { |a| [-a.number_available, a.number_waiting] }
+      results.first
     elsif( @libraries.length > 0 )
       "\"#{title}\",\"#{author}\", Not at any library"
     end
