@@ -5,6 +5,7 @@ The goal of this program is to help people spend as little as possible on books 
 After cloning this repo you will need to put a .env file in the root directory that is formatted like so:
 `
 GOODREADS_API_KEY='My API Key'
+
 GOODREADS_SECRET_KEY='MY SECRET KEY'`
 
 You can optain a api key and secret throught the goodreads api program here: https://www.goodreads.com/api/keys.  Once you have filled in this .env file you will then have to do a 
