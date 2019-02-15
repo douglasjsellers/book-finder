@@ -6,4 +6,3 @@ gem 'dotenv'
 gem 'goodreads'
 gem 'chromedriver-helper'
 gem 'selenium-webdriver'
-gem "rspec", "1.3.0"

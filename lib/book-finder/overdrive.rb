@@ -7,7 +7,7 @@ class OverDrive
 
 
   def find_book( title, author )
-    driver = @chrome.fetch_url(@overdrive_url)
+    driver = @chrome.fetch_url("#{@overdrive_url}/advanced-search")
     title = title.split( ':' ).first.strip
     title = title.split( '(' ).first.strip
     author_last_name = author.strip.split( ' ' ).last
